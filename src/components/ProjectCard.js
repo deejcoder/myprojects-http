@@ -6,21 +6,30 @@ export default class ProjectCard extends React.Component {
 
     render() {
 
+        let project = this.props.project
+        let dateCreated = new Date(Date.parse(project.DateCreated))
+
         return (
             <Card interactive={true}>
                 <H5>
-                    <Link to={`/project/${this.props.project.ID}`}>{this.props.project.Title}</Link>
-                    { this.props.project.Status === "completed" ? (
-                        <Icon icon="tick-circle" intent="primary" style={{ paddingLeft: "10px" }}></Icon>
+                    {/* Title */}
+                    <Link to={`/project/${project.ID}`}>{project.Title}</Link>
+
+                    {/* Status icon */}
+                    { project.Status === "completed" ? (
+                        <Icon icon="tick-circle" intent="primary" htmlTitle={`Completed on ${dateCreated}`} style={{ paddingLeft: "10px" }} />
                     ) : (
-                        <Icon icon="trending-up" intent="warning" style={{ paddingLeft: "10px" }}></Icon>
+                        <Icon icon="trending-up" intent="warning" htmlTitle="In progress" style={{ paddingLeft: "10px" }} />
                     )}
-                    
                 </H5>
 
-                <p>{this.props.project.Summary}</p>
+                {/* Summary/Description */}
+                <p>{project.Summary}</p>
 
-                {this.props.project.Tags.map((tag, i) => <Tag key={i} rounded={true} style={{ marginRight: "3px"}}>{tag}</Tag>)}
+                {/* Tags */}
+                {project.Tags.map((tag, i) => 
+                    <Tag key={i} rounded={true} style={{ marginRight: "3px"}}>{tag}</Tag>
+                )}
             </Card>
         );
     }
