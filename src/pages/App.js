@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Container } from 'react-grid-system';
-import ProjectCardGrid from './components/ProjectCardGrid';
+import ProjectCardGrid from '../components/ProjectCardGrid';
 
 
 function App() {

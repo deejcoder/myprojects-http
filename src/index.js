@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import './index.css';
 import 'normalize.css/normalize.css';
 import { Blueprint } from '@blueprintjs/core/lib/css/blueprint.css';
 
 // pages
-import App from './App';
-import Project from './Project';
+import App from './pages/App';
+import Project from './pages/Project';
 
 // errors
-import NotFound from './notfound';
+import NotFound from './pages/NotFound';
 
 import * as serviceWorker from './serviceWorker';
 

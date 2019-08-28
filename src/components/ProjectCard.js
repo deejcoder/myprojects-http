@@ -9,9 +9,9 @@ export default class ProjectCard extends React.Component {
         return (
             <Card interactive={true}>
                 <H5>
-                    <Link to={`/project/${this.props.slug}`}>{this.props.name}</Link>
+                    <Link to={`/project/${this.props.project.ID}`}>{this.props.project.Title}</Link>
                 </H5>
-                <p>{this.props.summary}</p>
+                <p>{this.props.project.Summary}</p>
 
                 <Tag rounded={true}
                 >Flask</Tag>
