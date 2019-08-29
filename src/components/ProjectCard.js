@@ -1,22 +1,25 @@
 import React from 'react';
-import { Card, Tag, H5, Icon } from '@blueprintjs/core';
+import { Card, Tag, H5, Icon, Classes } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 
+import ProjectHeaderDialog from './ProjectHeaderDialog'
+
 export default class ProjectCard extends React.Component {
+
 
     render() {
 
         let project = this.props.project
-        let dateCreated = new Date(Date.parse(project.DateCreated))
+        let dateCreated = new Date(Date.parse(project.date_created))
 
         return (
             <Card interactive={true}>
-                <H5>
+                <H5 className="cardHeader">
                     {/* Title */}
-                    <Link to={`/project/${project.ID}`}>{project.Title}</Link>
+                    <ProjectHeaderDialog project={project} />
 
                     {/* Status icon */}
-                    { project.Status === "completed" ? (
+                    { project.status === "completed" ? (
                         <Icon icon="tick-circle" intent="primary" htmlTitle={`Completed on ${dateCreated}`} style={{ paddingLeft: "10px" }} />
                     ) : (
                         <Icon icon="trending-up" intent="warning" htmlTitle="In progress" style={{ paddingLeft: "10px" }} />
@@ -24,10 +27,10 @@ export default class ProjectCard extends React.Component {
                 </H5>
 
                 {/* Summary/Description */}
-                <p>{project.Summary}</p>
+                <p>{project.summary}</p>
 
                 {/* Tags */}
-                {project.Tags.map((tag, i) => 
+                {project.tags.map((tag, i) => 
                     <Tag key={i} rounded={true} style={{ marginRight: "3px"}}>{tag}</Tag>
                 )}
             </Card>
