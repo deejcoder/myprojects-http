@@ -20,7 +20,7 @@ const endpoints = (
         <div>
             <Switch>
                 <Route exact path="/" component={App} />
-                <Route path="/project/:slug" component={Project} />
+                <Route path="/project/:id" component={Project} />
                 <Route component={NotFound} />
             </Switch>
         </div>

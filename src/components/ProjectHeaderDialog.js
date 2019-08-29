@@ -1,5 +1,6 @@
 import React from 'react';
 import { Classes, Dialog, H5, Intent, Button, AnchorButton } from '@blueprintjs/core';
+import ReactMarkdown from 'react-markdown';
 
 
 export default class ProjectHeaderDialog extends React.Component {
@@ -19,7 +20,7 @@ export default class ProjectHeaderDialog extends React.Component {
     render() {
 
         let project = this.props.project
-        
+
         return (
             <React.Fragment>
                 {/* Title of Project Card */}
@@ -37,7 +38,7 @@ export default class ProjectHeaderDialog extends React.Component {
                 >
                     {/* Dialog body */}
                     <div className={Classes.DIALOG_BODY}> 
-                        <p>{project.content}</p>
+                        <ReactMarkdown source={project.content} />
                     </div>
 
                     {/* Dialog footer */}

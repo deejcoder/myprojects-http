@@ -13,9 +13,20 @@ const client = axios.create({
 
 export default class APIClient {
 
-    
+    /**
+     * getProjectList gets the full list of projects
+     */
     getProjectList() {
         return this._fetch('get', '/projects');
+    }
+
+    /**
+     * getProject fetches the project with the given ID
+     * @param {int} id the ID of the project
+     */
+    getProject(id) {
+        console.log(`/project/${id}`)
+        return this._fetch('get', `/project/${id}`)
     }
 
     async _fetch(method, resource, payload) {
