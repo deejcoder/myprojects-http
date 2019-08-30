@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import 'normalize.css/normalize.css';
-import { Blueprint } from '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
 
 // pages
 import App from './pages/App';

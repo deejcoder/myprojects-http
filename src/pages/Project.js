@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { Container } from 'react-grid-system';
-import { Icon, Spinner, H2, Tag, Button } from '@blueprintjs/core';
+import { Icon, Spinner, H2, Button } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import styled from 'styled-components';
 
 import APIClient from '../api/APIClient';
 import ProjectStatusIcon from '../components/ProjectStatusIcon';
@@ -20,6 +21,7 @@ class Project extends React.Component {
         };
 
         this.params = this.props.match.params;
+
     }
 
     // project ids should be substitued with slugs in the near future
@@ -30,6 +32,15 @@ class Project extends React.Component {
     }
 
     render() {
+
+        const GitHubButton = styled(Button)`
+            height: 40px;
+            border-radius: 5px;
+            transition: background-color .1s;
+            &:not(:hover):not(:active) {
+                background-color: #ebf1f5;
+            }  
+        `
 
         let project = this.state.project;
 
@@ -54,16 +65,16 @@ class Project extends React.Component {
 
                             {/* Content */}
                             <div style={{ fontSize: 16, lineHeight: 1.8 }}>
-                                <ReactMarkdown>{project.content}</ReactMarkdown>
+                                <ReactMarkdown source={project.content} />
                             </div>
 
                             {/* Footer */}
                             <div className="pageOptions">
-                                <a href={project.projectLink}>
-                                    <Button minimal fill intent="primary" style={{ height: 40 }}>
+                                <a href={project.projectLink} style={{ textDecoration: "none" }}>
+                                    <GitHubButton minimal fill intent="primary">
                                         <Icon icon="code" style={{ paddingRight: 15, paddingLeft: 5 }}></Icon>
                                         View on GitHub
-                                    </Button>
+                                    </GitHubButton>
                                 </a>
                             </div>
                         </div>

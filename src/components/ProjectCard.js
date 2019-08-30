@@ -1,8 +1,7 @@
 import React from 'react';
-import { Card, Tag, H5, Icon, Classes } from '@blueprintjs/core';
+import { Card, Tag, H5 } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 
-import ProjectHeaderDialog from './ProjectHeaderDialog'
 import ProjectStatusIcon from './ProjectStatusIcon';
 
 
@@ -18,7 +17,6 @@ export default class ProjectCard extends React.Component {
                 <H5 className="cardHeader">
                     {/* Title */}
                     <Link to={`/project/${project._id}`}>{project.title}</Link>
-                    {/*<ProjectHeaderDialog project={project} />*/}
 
                     <ProjectStatusIcon project={project} />
                 </H5>

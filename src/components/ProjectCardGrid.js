@@ -30,7 +30,7 @@ export default class ProjectCardGrid extends React.Component {
                 row.push(<Col key={i} xs={8} md={4}><ProjectCard project={project}></ProjectCard></Col>)
 
                 // three per row, start with index=1
-                if((i+1) % 3 == 0 || i+1 == projects.length) {
+                if((i+1) % 3 === 0 || i+1 === projects.length) {
                     rows.push(row)
                     row = []
                 }
