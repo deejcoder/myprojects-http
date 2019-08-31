@@ -1,8 +1,10 @@
 import React from 'react';
-import { Intent, Button, Tooltip, FormGroup, InputGroup, H3, Colors } from '@blueprintjs/core';
+import { Link } from 'react-router-dom';
+import { Intent, Button, Tooltip, FormGroup, InputGroup, H3, Icon } from '@blueprintjs/core';
 
 import styled from 'styled-components';
 import APIClient from '../api/APIClient';
+import CloseButton from '../components/CloseButton';
 
 
 export default class Login extends React.Component {
@@ -69,28 +71,32 @@ export default class Login extends React.Component {
         `
 
         return (
-            <CenteredDiv>
-                <H3 style={{ paddingBottom: 10 }}>Administrative Login</H3>
-                <FormGroup
-                    label="Passphase"
-                    labelFor="text-input"
-                    labelInfo="(required)"
-                >
-                    <InputGroup
-                        inputRef={(input) => this.passwordField = input}
-                        placeholder="Enter passphase"
-                        rightElement={lockButton}
-                        type={showPassword ? "text" : "password"}
-                        intent={failed ? Intent.DANGER : Intent.NONE }
-                    />
+            <React.Fragment>
+                <CloseButton />
 
-                    {failed && 
-                        <p style={{ color: "#9E2B0E" }}>Login attempt failed</p>
-                    }
-                </FormGroup>
+                <CenteredDiv>
+                    <H3 style={{ paddingBottom: 10 }}>Administrative Login</H3>
+                    <FormGroup
+                        label="Passphase"
+                        labelFor="text-input"
+                        labelInfo="(required)"
+                    >
+                        <InputGroup
+                            inputRef={(input) => this.passwordField = input}
+                            placeholder="Enter passphase"
+                            rightElement={lockButton}
+                            type={showPassword ? "text" : "password"}
+                            intent={failed ? Intent.DANGER : Intent.NONE }
+                        />
 
-                <Button intent={Intent.PRIMARY} loading={loading} onClick={this.performLogin}>Login</Button>
-            </CenteredDiv>
+                        {failed && 
+                            <p style={{ color: "#9E2B0E" }}>Login attempt failed</p>
+                        }
+                    </FormGroup>
+
+                    <Button intent={Intent.PRIMARY} loading={loading} onClick={this.performLogin}>Login</Button>
+                </CenteredDiv>
+            </React.Fragment>
         )
     }
 

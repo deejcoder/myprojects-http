@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 import APIClient from '../api/APIClient';
 import ProjectStatusIcon from '../components/ProjectStatusIcon';
+import CloseButton from '../components/CloseButton';
 
 
 class Project extends React.Component {
@@ -45,11 +46,8 @@ class Project extends React.Component {
         let project = this.state.project;
 
         return (
-            <div style={{ marginRight: 15, marginLeft: 15, marginTop: 15 }}>
-                {/* Close button */}
-                <Link to="/">
-                    <Icon icon="cross" iconSize={25} />
-                </Link>
+            <React.Fragment>
+                <CloseButton />
 
                 <Container fluid style={{ maxWidth: 800, marginRight: "auto", marginLeft: "auto", marginTop: 30 }}>
 
@@ -80,7 +78,7 @@ class Project extends React.Component {
                         </div>
                     )}
                 </Container>
-            </div>
+            </React.Fragment>
         );
     }
 }
