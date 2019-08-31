@@ -18,7 +18,6 @@ export default class APIClient {
      */
     async getProjectList() {
         let response = await this._fetch('get', '/projects');
-        console.log(response);
         return response.data;
     }
 
@@ -39,7 +38,6 @@ export default class APIClient {
      * @param {*} secretKey 
      */
     async login(secretKey) {
-        console.log(secretKey);
         let response = await this._fetch('post', '/auth/login', {
             "secret_key": secretKey
         });
@@ -86,7 +84,6 @@ export default class APIClient {
     }
 
     async _fetch(method, resource, payload) {
-        console.log(payload);
         return client({
             method: method,
             url: resource,

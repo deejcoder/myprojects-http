@@ -1,5 +1,5 @@
 import React from 'react';
-import { Intent, Button, Tooltip, FormGroup, InputGroup, H3 } from '@blueprintjs/core';
+import { Intent, Button, Tooltip, FormGroup, InputGroup, H3, Colors } from '@blueprintjs/core';
 
 import styled from 'styled-components';
 import APIClient from '../api/APIClient';
@@ -12,31 +12,44 @@ export default class Login extends React.Component {
 
         this.state = {
             showPassword: false,
-            loggingIn: false,
+            loading: false,
+            failed: false,
         }
 
         this.performLogin = this.performLogin.bind(this);
     }
 
     async performLogin() {
-        this.setState({ loggingIn: true });
-        let client = new APIClient();
-        await client.login(this.passwordField.value);
 
-        this.setState({ loggingIn: false });
-        
+        // set loading spinner
+        this.setState({ loading: true });
+
+        // send login request (sends back a jwt token)
+        let client = new APIClient();
+        let result = await client.login(this.passwordField.value);
+
+        // login failed?
+        if(!result) {
+            this.setState({ failed: true, loading: false });
+            return;
+        }
+
+        this.setState({ loading: false, failed: false });
+        // todo... login complete, redirect user
+
     }
 
     render() {
 
+        const { showPassword, loading, failed } = this.state;
+
         const lockButton = (
-            <Tooltip content={`${this.state.showPassword ? "Hide" : "Show"} Password`}>
+            <Tooltip content={`${showPassword ? "Hide" : "Show"} Password`}>
                 <Button
-                    icon={this.state.showPassword ? "unlock" : "lock"}
+                    icon={showPassword ? "unlock" : "lock"}
                     intent={Intent.WARNING}
                     minimal
                     onClick={this._handleLockClick}
-                    loading={this.state.loggingIn}
                 />
             </Tooltip>
             
@@ -67,11 +80,16 @@ export default class Login extends React.Component {
                         inputRef={(input) => this.passwordField = input}
                         placeholder="Enter passphase"
                         rightElement={lockButton}
-                        type={this.state.showPassword ? "text" : "password"}
+                        type={showPassword ? "text" : "password"}
+                        intent={failed ? Intent.DANGER : Intent.NONE }
                     />
+
+                    {failed && 
+                        <p style={{ color: "#9E2B0E" }}>Login attempt failed</p>
+                    }
                 </FormGroup>
 
-                <Button intent={Intent.PRIMARY} onClick={this.performLogin}>Login</Button>
+                <Button intent={Intent.PRIMARY} loading={loading} onClick={this.performLogin}>Login</Button>
             </CenteredDiv>
         )
     }
