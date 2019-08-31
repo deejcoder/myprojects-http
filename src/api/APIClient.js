@@ -16,8 +16,10 @@ export default class APIClient {
     /**
      * getProjectList gets the full list of projects
      */
-    getProjectList() {
-        return this._fetch('get', '/projects');
+    async getProjectList() {
+        let response = await this._fetch('get', '/projects');
+        console.log(response);
+        return response.data;
     }
 
     /**
@@ -25,10 +27,53 @@ export default class APIClient {
      * @param {int} id the ID of the project
      */
     async getProject(id) {
-        let project = await this._fetch('get', `/project/${id}`);
+        let response = await this._fetch('get', `/project/${id}/`);
+        let project = response.data;
 
         project.content = this.convertNewlines(project.content);
         return project;
+    }
+
+    /**
+     * login requests a new jwt token for the user and validates it
+     * @param {*} secretKey 
+     */
+    async login(secretKey) {
+        console.log(secretKey);
+        let response = await this._fetch('post', '/auth/login', {
+            "secret_key": secretKey
+        });
+
+        if(response.error != null) {
+            return false;
+        }
+        let token = response.data.token;
+
+        if(token != null) {
+            // check the token is valid
+            sessionStorage.setItem("token", token);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * validate checks if a user is validated with a valid jwt token
+     */
+    async validate() {
+        let token = sessionStorage.getItem("token");
+        let resp = await this._fetch('get', '/auth/validate', {
+            token: token
+        })
+
+        if(resp.error != null) {
+            return false;
+        }
+
+        if(resp.data.validated === true) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -41,13 +86,22 @@ export default class APIClient {
     }
 
     async _fetch(method, resource, payload) {
+        console.log(payload);
         return client({
-            method,
+            method: method,
             url: resource,
-            payload,
+            data: payload,
             headers: {},
         }).then(resp => {
-            return resp.data ? resp.data: [];
-        })
+            return {
+                data: resp.data ? resp.data : [],
+                error: null
+            }
+        }).catch(error => {
+            return {
+                data: null,
+                error: error
+            }
+        });
     }
 }

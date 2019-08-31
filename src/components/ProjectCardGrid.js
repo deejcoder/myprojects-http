@@ -16,6 +16,7 @@ export default class ProjectCardGrid extends React.Component {
     async componentDidMount() {
         let client = new APIClient();
         let projects = await client.getProjectList();
+
         this.setState({ loading: false, projects: projects});
     }
 
