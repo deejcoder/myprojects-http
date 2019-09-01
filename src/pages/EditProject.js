@@ -18,10 +18,12 @@ export default class EditProject extends React.Component {
     }
 
     async componentDidMount() {
+        let params = this.props.match.params;
         let validated = await Auth.isValidated();
 
+        // validated, get the project to edit
         if(validated) {
-            let pid = this.props.match.params.id;
+            let pid = params.id;
             this.setState({ 
                 loading: false, 
                 validated: validated, 
@@ -40,6 +42,7 @@ export default class EditProject extends React.Component {
                 <React.Fragment>
                     {validated ? (
                         <React.Fragment>
+
                             <BackButton />
                             <PageContainer>
                                 <H2>Editing {project.title}</H2>
@@ -47,6 +50,7 @@ export default class EditProject extends React.Component {
                                 <Button intent={Intent.PRIMARY}>Save</Button>
                             </PageContainer>
                         </React.Fragment>
+
                     ) : (
                         <Redirect to="/" />
                     )}

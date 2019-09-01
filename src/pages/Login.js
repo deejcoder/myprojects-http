@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Intent, Button, Tooltip, Label, InputGroup, H3, FormGroup } from '@blueprintjs/core';
+import { Intent, Button, Tooltip, InputGroup, H3, FormGroup } from '@blueprintjs/core';
 
 import styled from 'styled-components';
 import { Auth } from '../api';

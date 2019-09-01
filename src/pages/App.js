@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Redirect } from 'react-router-dom';
 import ProjectCardGrid from '../components/ProjectCardGrid';
 import { Intent, Button } from '@blueprintjs/core';
 import { Auth } from '../api';
