@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BehaviorSubject } from 'rxjs';
 
 
 // const BASE_URL = 'http://me.thecodingkiwi.com:8080'
@@ -10,8 +11,18 @@ const client = axios.create({
     json: true,
 });
 
+// gets current jwt token
+const currentTokenSubject = new BehaviorSubject(sessionStorage.getItem("token"))
+// checks validation whenever user refreshes page or loads for first time
+const validationSubject = new BehaviorSubject(false);
+
 
 export default class APIClient {
+
+    constructor() {
+        this.token = currentTokenSubject.getValue();
+        this.validated = validationSubject.getValue();
+    }
 
     /**
      * getProjectList gets the full list of projects
@@ -59,9 +70,10 @@ export default class APIClient {
      * validate checks if a user is validated with a valid jwt token
      */
     async validate() {
-        let token = sessionStorage.getItem("token");
-        let resp = await this._fetch('get', '/auth/validate', {
-            token: token
+        if(!this.token) { return false }
+
+        let resp = await this._fetch('get', '/auth/validate', {}, {
+            authorization: `Bearer ${this.token}`
         })
 
         if(resp.error != null) {
@@ -74,6 +86,17 @@ export default class APIClient {
         return false;
     }
 
+    async checkValidation() {
+        let validated = this.validated;
+
+        if(this.validated === false) {
+            validated = await this.validate();
+            // multicast to all components that use APIClient
+            validationSubject.next(validated);
+        }
+        return validated;
+    }
+
     /**
      * convertNewlines converts all \\n into \n, since json encodes \n as \\n
      * @param {*} string 
@@ -83,12 +106,12 @@ export default class APIClient {
         return string.replace(regex, '\n');
     }
 
-    async _fetch(method, resource, payload) {
+    async _fetch(method, resource, payload, headers) {
         return client({
             method: method,
             url: resource,
             data: payload,
-            headers: {},
+            headers: headers,
         }).then(resp => {
             return {
                 data: resp.data ? resp.data : [],
@@ -102,3 +125,4 @@ export default class APIClient {
         });
     }
 }
+

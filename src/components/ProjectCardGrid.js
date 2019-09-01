@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
-import { Spinner } from '@blueprintjs/core'
 
 import ProjectCard from './ProjectCard';
 import APIClient from '../api/APIClient'
+import LoadingSpinner from './LoadingSpinner';
 
 
 export default class ProjectCardGrid extends React.Component {
@@ -38,20 +38,20 @@ export default class ProjectCardGrid extends React.Component {
             }
 
             return (
-                <Container fluid style={{ lineHeight: '24px'}}>
+                <Container style={{ lineHeight: '24px'}}>
                     {rows.map((r, i) => <Row key={i} style={{ paddingBottom: '30px' }}>{r}</Row>)}
                 </Container>
             )
         }
 
+        if(this.state.loading) {
+            return (
+                <LoadingSpinner />
+            )
+        }
+
         return (
-            <React.Fragment>
-                {this.state.loading ? (
-                    <Spinner intent="primary" size="50"></Spinner>
-                ) : (
-                    <Rows projects={this.state.projects}></Rows>
-                )}
-            </React.Fragment>
+            <Rows projects={this.state.projects}></Rows>
         )
     }
 }

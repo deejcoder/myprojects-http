@@ -8,6 +8,7 @@ import '@blueprintjs/core/lib/css/blueprint.css';
 // pages
 import App from './pages/App';
 import Project from './pages/Project';
+import EditProject from './pages/EditProject';
 import Login from './pages/Login';
 
 // errors
@@ -21,7 +22,8 @@ const endpoints = (
         <div>
             <Switch>
                 <Route exact path="/" component={App} />
-                <Route path="/project/:id" component={Project} />
+                <Route exact path="/project/:id/" component={Project} />
+                <Route path="/project/:id/edit" component={EditProject} />
                 <Route path="/auth/login" component={Login} />
                 <Route component={NotFound} />
             </Switch>

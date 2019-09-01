@@ -9,10 +9,7 @@ function App() {
     <div className="App">
         <h1>Home</h1>
         
-        <Container>
-          
-          <ProjectCardGrid />
-        </Container>
+        <ProjectCardGrid />
         
     </div>
   );

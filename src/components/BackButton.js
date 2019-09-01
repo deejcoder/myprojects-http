@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Icon, Tooltip } from '@blueprintjs/core';
 
 
-export default class CloseButton extends React.Component {
+export default class BackButton extends React.Component {
     render() {
         return (
             <Tooltip content="Back">

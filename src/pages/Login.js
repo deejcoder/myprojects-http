@@ -4,7 +4,7 @@ import { Intent, Button, Tooltip, FormGroup, InputGroup, H3, Icon } from '@bluep
 
 import styled from 'styled-components';
 import APIClient from '../api/APIClient';
-import CloseButton from '../components/CloseButton';
+import BackButton from '../components/BackButton';
 
 
 export default class Login extends React.Component {
@@ -72,7 +72,7 @@ export default class Login extends React.Component {
 
         return (
             <React.Fragment>
-                <CloseButton />
+                <BackButton />
 
                 <CenteredDiv>
                     <H3 style={{ paddingBottom: 10 }}>Administrative Login</H3>

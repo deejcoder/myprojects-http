@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { Container } from 'react-grid-system';
-import { Icon, Spinner, H2, Button } from '@blueprintjs/core';
+import { Icon, H2, Button, Intent } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
 import APIClient from '../api/APIClient';
 import ProjectStatusIcon from '../components/ProjectStatusIcon';
-import CloseButton from '../components/CloseButton';
+import BackButton from '../components/BackButton';
+import LoadingSpinner from '../components/LoadingSpinner';
+import PageContainer from '../components/PageContainer';
 
 
 class Project extends React.Component {
@@ -47,37 +48,35 @@ class Project extends React.Component {
 
         return (
             <React.Fragment>
-                <CloseButton />
+                <BackButton />
 
-                <Container fluid style={{ maxWidth: 800, marginRight: "auto", marginLeft: "auto", marginTop: 30 }}>
+                {this.state.loading ? (
+                    <LoadingSpinner />
+                ) : (
+                    <PageContainer>
+                        {/* Header */}
+                        <H2>
+                            {project.title}
+                            <ProjectStatusIcon project={project} />
+                            <Link to={`/project/${this.params.id}/edit`}><Button intent={Intent.PRIMARY} style={{ float: "right" }}>Edit</Button></Link>
+                        </H2>
 
-                    {this.state.loading ? (
-                        <Spinner intent="primary" size="50"></Spinner>
-                    ) : (
-                        <div>
-                            {/* Header */}
-                            <H2>
-                                {project.title}
-                                <ProjectStatusIcon project={project} />
-                            </H2>
-
-                            {/* Content */}
-                            <div style={{ fontSize: 16, lineHeight: 1.8 }}>
-                                <ReactMarkdown source={project.content} />
-                            </div>
-
-                            {/* Footer */}
-                            <div className="pageOptions">
-                                <a href={project.projectLink} style={{ textDecoration: "none" }}>
-                                    <GitHubButton minimal fill intent="primary">
-                                        <Icon icon="code" style={{ paddingRight: 15, paddingLeft: 5 }}></Icon>
-                                        View on GitHub
-                                    </GitHubButton>
-                                </a>
-                            </div>
+                        {/* Content */}
+                        <div style={{ fontSize: 16, lineHeight: 1.8 }}>
+                            <ReactMarkdown source={project.content} />
                         </div>
-                    )}
-                </Container>
+
+                        {/* Footer */}
+                        <div className="pageOptions">
+                            <a href={project.projectLink} style={{ textDecoration: "none" }}>
+                                <GitHubButton minimal fill intent="primary">
+                                    <Icon icon="code" style={{ paddingRight: 15, paddingLeft: 5 }}></Icon>
+                                    View on GitHub
+                                </GitHubButton>
+                            </a>
+                        </div>
+                    </PageContainer>
+                )}
             </React.Fragment>
         );
     }
