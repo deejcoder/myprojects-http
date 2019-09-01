@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Intent, Button, Tooltip, Label, InputGroup, H3 } from '@blueprintjs/core';
+import { Intent, Button, Tooltip, Label, InputGroup, H3, FormGroup } from '@blueprintjs/core';
 
 import styled from 'styled-components';
 import APIClient from '../api/APIClient';
@@ -85,9 +85,13 @@ export default class Login extends React.Component {
 
                 <CenteredDiv>
                     <H3 style={{ paddingBottom: 10 }}>Administrative Login</H3>
-                    <Label>
-                        Passphase*
+                    <FormGroup
+                        label="Passphase"
+                        labelInfo="(required)"
+                        labelFor="password-field"
+                    >
                         <InputGroup
+                            id="password-field"
                             inputRef={(input) => this.passwordField = input}
                             placeholder="Enter passphase"
                             rightElement={lockButton}
@@ -98,7 +102,7 @@ export default class Login extends React.Component {
                         {failed && 
                             <p style={{ color: "#9E2B0E" }}>Login attempt failed</p>
                         }
-                    </Label>
+                    </FormGroup>
 
                     <Button intent={Intent.PRIMARY} loading={loading} onClick={this.performLogin}>Login</Button>
                 </CenteredDiv>
