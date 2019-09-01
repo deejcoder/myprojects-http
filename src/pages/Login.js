@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Intent, Button, Tooltip, FormGroup, InputGroup, H3, Icon } from '@blueprintjs/core';
+import { Redirect } from 'react-router-dom';
+import { Intent, Button, Tooltip, Label, InputGroup, H3 } from '@blueprintjs/core';
 
 import styled from 'styled-components';
 import APIClient from '../api/APIClient';
@@ -16,28 +16,34 @@ export default class Login extends React.Component {
             showPassword: false,
             loading: false,
             failed: false,
+            success: false,
         }
 
         this.performLogin = this.performLogin.bind(this);
     }
 
-    async performLogin() {
+    async componentDidMount() {
+        // check if user is already logged in
+        let client = new APIClient();
+        if(await client.checkValidation()) {
+            this.setState({ success: true });
+        }
+    }
 
+    async performLogin() {
         // set loading spinner
         this.setState({ loading: true });
 
         // send login request (sends back a jwt token)
         let client = new APIClient();
-        let result = await client.login(this.passwordField.value);
 
-        // login failed?
-        if(!result) {
+        let success = await client.login(this.passwordField.value);
+        if(!success) {
             this.setState({ failed: true, loading: false });
             return;
         }
 
-        this.setState({ loading: false, failed: false });
-        // todo... login complete, redirect user
+        this.setState({ success: true });
 
     }
 
@@ -72,15 +78,15 @@ export default class Login extends React.Component {
 
         return (
             <React.Fragment>
+                {/* Redirect if user has logged in */}
+                {this.state.success && <Redirect to="/" />}
+
                 <BackButton />
 
                 <CenteredDiv>
                     <H3 style={{ paddingBottom: 10 }}>Administrative Login</H3>
-                    <FormGroup
-                        label="Passphase"
-                        labelFor="text-input"
-                        labelInfo="(required)"
-                    >
+                    <Label>
+                        Passphase*
                         <InputGroup
                             inputRef={(input) => this.passwordField = input}
                             placeholder="Enter passphase"
@@ -92,7 +98,7 @@ export default class Login extends React.Component {
                         {failed && 
                             <p style={{ color: "#9E2B0E" }}>Login attempt failed</p>
                         }
-                    </FormGroup>
+                    </Label>
 
                     <Button intent={Intent.PRIMARY} loading={loading} onClick={this.performLogin}>Login</Button>
                 </CenteredDiv>
