@@ -25,7 +25,7 @@ export default class Login extends React.Component {
     async componentDidMount() {
         // check if user is already logged in
         let client = new APIClient();
-        if(await client.checkValidation()) {
+        if(await client.isValidated()) {
             this.setState({ success: true });
         }
     }

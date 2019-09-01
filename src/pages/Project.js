@@ -20,6 +20,7 @@ class Project extends React.Component {
         this.state = {
             loading: true,
             project: null,
+            hasAuth: false,
         };
 
         this.params = this.props.match.params;
@@ -31,6 +32,10 @@ class Project extends React.Component {
         let client = new APIClient();
         let project = await client.getProject(this.params.id);
         this.setState({ loading: false, project: project })
+
+        if(await client.isValidated()) {
+            this.setState({ hasAuth: true });
+        }
     }
 
     render() {
@@ -58,7 +63,12 @@ class Project extends React.Component {
                         <H2>
                             {project.title}
                             <ProjectStatusIcon project={project} />
-                            <Link to={`/project/${this.params.id}/edit`}><Button intent={Intent.PRIMARY} style={{ float: "right" }}>Edit</Button></Link>
+
+                            {this.state.hasAuth &&
+                                <Link to={`/project/${this.params.id}/edit`}>
+                                    <Button intent={Intent.PRIMARY} style={{ float: "right" }}>Edit</Button>
+                                </Link>
+                            }
                         </H2>
 
                         {/* Content */}

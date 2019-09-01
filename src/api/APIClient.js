@@ -61,9 +61,17 @@ export default class APIClient {
         if(token != null) {
             // check the token is valid
             sessionStorage.setItem("token", token);
+            currentTokenSubject.next(token);
             return true;
         }
         return false;
+    }
+
+    logout() {
+        if(!this.token) { return }
+
+        sessionStorage.removeItem("token");
+        currentTokenSubject.next(null);
     }
 
     /**
@@ -86,14 +94,12 @@ export default class APIClient {
         return false;
     }
 
-    async checkValidation() {
+    async isValidated() {
         let validated = this.validated;
 
-        if(this.validated === false) {
-            validated = await this.validate();
-            // multicast to all components that use APIClient
-            validationSubject.next(validated);
-        }
+        validated = await this.validate();
+        // multicast to all components that use APIClient
+        validationSubject.next(validated);
         return validated;
     }
 

@@ -58,7 +58,6 @@ export default class EditProjectForm extends React.Component {
     }
 
     _handleChange = (values) => {
-        console.log(values);
         this.setState({ tags: values });
     }
 }

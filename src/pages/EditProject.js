@@ -19,7 +19,7 @@ export default class EditProject extends React.Component {
 
     async componentDidMount() {
         let client = new APIClient();
-        let validated = await client.checkValidation();
+        let validated = await client.isValidated();
 
         if(validated) {
             let pid = this.props.match.params.id;
@@ -35,7 +35,6 @@ export default class EditProject extends React.Component {
     render() {
 
         let { loading, validated, project } = this.state;
-        console.log(loading, validated)
 
         if(!loading) {
             return (
