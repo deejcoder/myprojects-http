@@ -2,11 +2,11 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { H2, Intent, Button } from '@blueprintjs/core';
 
-import APIClient from '../api/APIClient';
 import EditProjectForm from '../components/EditProjectForm';
 import PageContainer from '../components/PageContainer';
 import BackButton from '../components/BackButton';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Auth, ProjectStore } from '../api';
 
 
 export default class EditProject extends React.Component {
@@ -18,15 +18,14 @@ export default class EditProject extends React.Component {
     }
 
     async componentDidMount() {
-        let client = new APIClient();
-        let validated = await client.isValidated();
+        let validated = await Auth.isValidated();
 
         if(validated) {
             let pid = this.props.match.params.id;
             this.setState({ 
                 loading: false, 
                 validated: validated, 
-                project: await client.getProject(pid)
+                project: await ProjectStore.getProject(pid)
             });
             return;
         }

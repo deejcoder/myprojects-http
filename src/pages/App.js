@@ -3,7 +3,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import ProjectCardGrid from '../components/ProjectCardGrid';
 import { Intent, Button } from '@blueprintjs/core';
-import APIClient from '../api/APIClient';
+import { Auth } from '../api';
 
 
 export default class App extends React.Component {
@@ -20,14 +20,13 @@ export default class App extends React.Component {
     }
 
     async componentDidMount() {
-        let client = new APIClient();
-        if(await client.isValidated()) {
+        if(await Auth.isValidated()) {
             this.setState({ hasAuth: true });
         }
     }
 
     _handleClick() {
-        new APIClient().logout();
+        Auth.logout();
         this.setState({ loggedOut: true });
     }
 

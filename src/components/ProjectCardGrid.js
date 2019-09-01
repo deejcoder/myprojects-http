@@ -2,8 +2,8 @@ import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 
 import ProjectCard from './ProjectCard';
-import APIClient from '../api/APIClient'
 import LoadingSpinner from './LoadingSpinner';
+import { ProjectStore } from '../api';
 
 
 export default class ProjectCardGrid extends React.Component {
@@ -14,9 +14,7 @@ export default class ProjectCardGrid extends React.Component {
     }
 
     async componentDidMount() {
-        let client = new APIClient();
-        let projects = await client.getProjectList();
-
+        let projects = await ProjectStore.getProjectList();
         this.setState({ loading: false, projects: projects});
     }
 

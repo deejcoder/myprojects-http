@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
-import APIClient from '../api/APIClient';
+import { Auth, ProjectStore } from '../api';
 import ProjectStatusIcon from '../components/ProjectStatusIcon';
 import BackButton from '../components/BackButton';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -29,11 +29,10 @@ class Project extends React.Component {
 
     // project ids should be substitued with slugs in the near future
     async componentDidMount() {
-        let client = new APIClient();
-        let project = await client.getProject(this.params.id);
+        let project = await ProjectStore.getProject(this.params.id);
         this.setState({ loading: false, project: project })
 
-        if(await client.isValidated()) {
+        if(await Auth.isValidated()) {
             this.setState({ hasAuth: true });
         }
     }

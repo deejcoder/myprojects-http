@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { Intent, Button, Tooltip, Label, InputGroup, H3, FormGroup } from '@blueprintjs/core';
 
 import styled from 'styled-components';
-import APIClient from '../api/APIClient';
+import { Auth } from '../api';
 import BackButton from '../components/BackButton';
 
 
@@ -24,8 +24,7 @@ export default class Login extends React.Component {
 
     async componentDidMount() {
         // check if user is already logged in
-        let client = new APIClient();
-        if(await client.isValidated()) {
+        if(await Auth.isValidated()) {
             this.setState({ success: true });
         }
     }
@@ -35,9 +34,7 @@ export default class Login extends React.Component {
         this.setState({ loading: true });
 
         // send login request (sends back a jwt token)
-        let client = new APIClient();
-
-        let success = await client.login(this.passwordField.value);
+        let success = await Auth.login(this.passwordField.value);
         if(!success) {
             this.setState({ failed: true, loading: false });
             return;
