@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import {
     InputGroup,
     HTMLSelect,
@@ -7,7 +8,8 @@ import {
     TextArea,
     Button,
     Intent,
-    Callout 
+    Callout,
+    ControlGroup
 } from '@blueprintjs/core';
 
 import { ProjectStore } from '../api';
@@ -23,6 +25,8 @@ export default class EditProjectForm extends React.Component {
             updating: false,
             errors: null,
             updated: false,
+            deleting: false,
+            deleted: false,
 
             // fields
             title: this.props.project.title,
@@ -69,6 +73,14 @@ export default class EditProjectForm extends React.Component {
         })
     }
 
+    deleteProject = () => {
+        this.setState({ deleting: true });
+        
+        ProjectStore.deleteProject(this.props.project._id).then(() => {
+            this.setState({ deleted: true, deleting: false });
+        });
+    }
+
     render() {
 
         let errors;
@@ -80,6 +92,7 @@ export default class EditProjectForm extends React.Component {
 
         return (
             <React.Fragment>
+                {this.state.deleted && <Redirect to="/" />}
 
                 {this.state.updated && 
                     <Callout title="Success!" intent={Intent.SUCCESS} style={{ marginBottom: 20 }}>
@@ -131,13 +144,22 @@ export default class EditProjectForm extends React.Component {
                     />
                 </FormGroup>
 
-                <Button 
-                    loading={this.state.updating ? true : false}
-                    intent={Intent.PRIMARY}
-                    onClick={this.updateProject}
-                >
-                    Save
-                </Button>
+                <ControlGroup>
+                    <Button 
+                        loading={this.state.updating ? true : false}
+                        intent={Intent.WARNING}
+                        onClick={this.updateProject}
+                    >
+                        Save
+                    </Button>
+                    <Button
+                        loading={this.state.deleting ? true : false}
+                        intent={Intent.DANGER}
+                        onClick={this.deleteProject}
+                    >
+                        Delete
+                    </Button>
+                </ControlGroup>
 
             </React.Fragment>
         )

@@ -11,7 +11,7 @@ async function getProjectList() {
 
 /**
  * getProject fetches the project with the given ID
- * @param {int} id the ID of the project
+ * @param {string} id the ID of the project
  */
 async function getProject(id) {
     let response = await request({ method: 'get', resource: `/project/${id}/` });
@@ -21,6 +21,11 @@ async function getProject(id) {
     return project;
 }
 
+/**
+ * updateProject updates a project
+ * @param {string} id project id
+ * @param {*} project new project information
+ */
 async function updateProject({ id, project }) {
     let response = await request({ 
         method: 'post', 
@@ -34,6 +39,23 @@ async function updateProject({ id, project }) {
 }
 
 /**
+ * deleteProject deletes an existing project with the provided ID
+ * @param {string} id 
+ */
+async function deleteProject(id) {
+    let response = await request({ 
+        method: 'delete', 
+        resource: `/project/${id}/delete`, 
+        token: getToken() 
+    });
+
+    if(response.status === 404) {
+        return false;
+    }
+    return true;
+}
+
+/**
  * convertNewlines converts all \\n into \n, since json encodes \n as \\n
  * @param {*} string 
  */
@@ -42,4 +64,4 @@ function convertNewlines(string) {
     return string.replace(regex, '\n');
 }
 
-export { getProjectList, getProject, updateProject };
+export { getProjectList, getProject, updateProject, deleteProject };
