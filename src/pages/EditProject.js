@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { H2, Intent, Button } from '@blueprintjs/core';
+import { H2 } from '@blueprintjs/core';
 
 import EditProjectForm from '../components/EditProjectForm';
 import PageContainer from '../components/PageContainer';
@@ -24,10 +24,11 @@ export default class EditProject extends React.Component {
         // validated, get the project to edit
         if(validated) {
             let pid = params.id;
+            let proj = await ProjectStore.getProject(pid);
             this.setState({ 
                 loading: false, 
                 validated: validated, 
-                project: await ProjectStore.getProject(pid)
+                project: proj
             });
             return;
         }
@@ -47,7 +48,6 @@ export default class EditProject extends React.Component {
                             <PageContainer>
                                 <H2>Editing {project.title}</H2>
                                 <EditProjectForm project={project} />
-                                <Button intent={Intent.PRIMARY}>Save</Button>
                             </PageContainer>
                         </React.Fragment>
 

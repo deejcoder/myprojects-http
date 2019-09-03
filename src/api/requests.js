@@ -9,25 +9,25 @@ const client = axios.create({
 });
 
 
-async function request({method, resource, payload, header, token}) {
-    try {
-        let resp = await client({
-            method: method,
-            url: resource,
-            data: payload,
-            headers: token ? { ...header, authorization: `Bearer ${token}`} : header,
-        })
+function request({method, resource, payload, header, token}) {
+    return client({
+        method: method,
+        url: resource,
+        data: payload,
+        headers: token ? { ...header, authorization: `Bearer ${token}`} : header,
+    }).then((resp) => {
         return {
-            data: resp.data || [],
+            status: resp.status,
+            data: resp.data || null,
             error: null
         }
-    }
-    catch(error) {
-        return {
-            data: null,
-            error: error
-        }
-    }
+    }).catch((error) => {
+        return Promise.reject({
+            status: error.response.status,
+            formErrors: error.response.data.formErrors,
+            error: error.message
+        });
+    })
 }
 
 export { request };

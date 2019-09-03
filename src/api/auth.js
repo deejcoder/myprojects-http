@@ -68,4 +68,8 @@ async function isValidated() {
     return validated;
 }
 
-export { login, logout, isValidated };
+function getToken() {
+    return tokenSubject.getValue();
+}
+
+export { login, logout, isValidated, getToken };

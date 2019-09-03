@@ -1,4 +1,5 @@
 import { request } from './requests';
+import { getToken } from './auth';
 
 /**
  * getProjectList gets the full list of projects
@@ -20,6 +21,18 @@ async function getProject(id) {
     return project;
 }
 
+async function updateProject({ id, project }) {
+    let response = await request({ 
+        method: 'post', 
+        resource: `/project/${id}/update`, 
+        payload: project,
+        token: getToken() 
+    }).catch(errorResp => {
+        return Promise.reject(errorResp)
+    });
+    return response;
+}
+
 /**
  * convertNewlines converts all \\n into \n, since json encodes \n as \\n
  * @param {*} string 
@@ -29,4 +42,4 @@ function convertNewlines(string) {
     return string.replace(regex, '\n');
 }
 
-export { getProjectList, getProject };
+export { getProjectList, getProject, updateProject };
