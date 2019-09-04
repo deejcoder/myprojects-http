@@ -8,11 +8,11 @@ import {
     TextArea,
     Button,
     Intent,
-    Callout,
     ControlGroup
 } from '@blueprintjs/core';
 
 import { ProjectStore } from '../api';
+import StatusCallout from '../components/StatusCallout';
 
 
 export default class EditProjectForm extends React.Component {
@@ -21,15 +21,11 @@ export default class EditProjectForm extends React.Component {
         super(props);
 
         this.state = {
-            // statuses
-            updating: false,
+            ok: false,
+            loading: false,
+            message: null,
             errors: null,
-            updated: false,
-
-            deleting: false,
             deleted: false,
-
-            errorMessage: null,
 
             // fields
             title: this.props.project.title,
@@ -56,61 +52,55 @@ export default class EditProjectForm extends React.Component {
 
     // sends an update request to update the project
     updateProject = () => {
+        this.setState({ loading: true });
+        
         let project = this.props.project;
-        this.setState({ updating: true });
+        let { title, status, tags, projectLink, summary, content } = this.state;
 
         ProjectStore.updateProject({ 
             id: project._id, 
             project: {
                 _id: project._id,
-                title: this.state.title,
-                status: this.state.status,
-                tags: this.state.tags,
-                projectLink: this.state.projectLink,
-                summary: this.state.summary,
-                content: this.state.content,
+                title: title,
+                status: status,
+                tags: tags,
+                projectLink: projectLink,
+                summary: summary,
+                content: content,
             }
         }).then((reply) => {
-            if(!reply.updated) {
-                this.setState({ updating: false, updated: false, errorMessage: reply.message, errors: reply.errors})
-                return
-            }
-            this.setState({ updating: false, errorMessage: null, updated: true, errors: null });
+            this.setState({ 
+                loading: false, 
+                ok: reply.ok, 
+                message: reply.message, 
+                errors: reply.errors
+            })
         })
     }
 
+    // sends a request to delete the project
     deleteProject = () => {
-        this.setState({ deleting: true });
+        this.setState({ loading: true });
         
-        ProjectStore.deleteProject(this.props.project._id).then(() => {
-            this.setState({ deleted: true, deleting: false });
+        ProjectStore.deleteProject(this.props.project._id).then((deleted) => {
+            this.setState({
+                loading: false,
+                deleted: deleted
+            })
         });
     }
 
     render() {
 
+        let { ok, message, errors, loading } = this.state;
+
         return (
             <React.Fragment>
                 {this.state.deleted && <Redirect to="/" />}
-
-                {this.state.updated && 
-                    <Callout title="Success!" intent={Intent.SUCCESS} style={{ marginBottom: 20 }}>
-                        The project was successfully updated.
-                    </Callout>
-
+                {message !== null &&
+                    <StatusCallout success={ok} message={message} errors={errors} />
                 }
-                {this.state.errorMessage !== null &&
-                    <Callout title="Error" intent={Intent.DANGER} style={{ marginBottom: 20 }}>
-                        {this.state.errorMessage}
-                        {this.state.errors &&
-                            <ul>
-                                {this.state.errors.map((e, i) => 
-                                    <li key={i}>{e.error}</li>
-                                )}
-                            </ul>
-                        }
-                    </Callout>
-                }
+
                 <FormGroup label="Title" labelFor="title" labelInfo="(required)">
                     <InputGroup name='title' onChange={this.handleChange} value={this.state.title} />
                 </FormGroup>
@@ -149,14 +139,14 @@ export default class EditProjectForm extends React.Component {
 
                 <ControlGroup>
                     <Button 
-                        loading={this.state.updating ? true : false}
+                        loading={loading ? true : false}
                         intent={Intent.WARNING}
                         onClick={this.updateProject}
                     >
                         Save
                     </Button>
                     <Button
-                        loading={this.state.deleting ? true : false}
+                        loading={loading ? true : false}
                         intent={Intent.DANGER}
                         onClick={this.deleteProject}
                     >

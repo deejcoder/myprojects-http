@@ -6,7 +6,6 @@ import { getToken } from './auth';
  */
 async function getProjectList() {
     let { response, body } = await request({ method: 'get', resource: '/projects' });
-    console.log(response, body);
     if(!response.ok) {
         return null;
     }
@@ -19,7 +18,6 @@ async function getProjectList() {
  */
 async function getProject(id) {
     let { response, body } = await request({ method: 'get', resource: `/project/${id}/` });
-    console.log("body", body);
     if(!response.ok) {
         return null;
     }
@@ -42,17 +40,11 @@ async function updateProject({ id, project }) {
         token: getToken() 
     })
     
-    if(!response.ok) {
-        return {
-            updated: false,
-            message: response.message,
-            errors: body.validationErrors
-        }
-    }
     return {
-        updated: true
+        ok: response.ok,
+        message: response.message,
+        errors: body.validationErrors
     }
-    
 }
 
 /**
