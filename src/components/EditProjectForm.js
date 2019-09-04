@@ -25,8 +25,11 @@ export default class EditProjectForm extends React.Component {
             updating: false,
             errors: null,
             updated: false,
+
             deleting: false,
             deleted: false,
+
+            errorMessage: null,
 
             // fields
             title: this.props.project.title,
@@ -40,20 +43,22 @@ export default class EditProjectForm extends React.Component {
         this.updateProject = this.updateProject.bind(this);
     }
 
+    // handles whenever a field is modified, updates it
     handleChange = (event) => {
         let name = event.target.name, value = event.target.value;
         this.setState({ [name]: value })
     }
 
+    // handles whenever a project tag is added/removed
     handleTagsUpdate = (values) => {
         this.setState({ tags: values });
     }
 
+    // sends an update request to update the project
     updateProject = () => {
         let project = this.props.project;
         this.setState({ updating: true });
 
-        // rebuild the project object, and send an update request
         ProjectStore.updateProject({ 
             id: project._id, 
             project: {
@@ -65,11 +70,12 @@ export default class EditProjectForm extends React.Component {
                 summary: this.state.summary,
                 content: this.state.content,
             }
-        }).then(() => {
-            this.setState({ updating: false, updated: true, errors: null });
-        }).catch((errorResp) => {
-            console.log(errorResp)
-            this.setState({ updating: false, updated: false, errors: errorResp.formErrors||null });
+        }).then((reply) => {
+            if(!reply.updated) {
+                this.setState({ updating: false, updated: false, errorMessage: reply.message, errors: reply.errors})
+                return
+            }
+            this.setState({ updating: false, errorMessage: null, updated: true, errors: null });
         })
     }
 
@@ -83,13 +89,6 @@ export default class EditProjectForm extends React.Component {
 
     render() {
 
-        let errors;
-        if(this.state.errors !== null) {
-            errors = Object.keys(this.state.errors).map((field) => {
-                return <li key={field}>{this.state.errors[field]}</li>
-            })
-        }
-
         return (
             <React.Fragment>
                 {this.state.deleted && <Redirect to="/" />}
@@ -100,12 +99,16 @@ export default class EditProjectForm extends React.Component {
                     </Callout>
 
                 }
-                {this.state.errors !== null &&
+                {this.state.errorMessage !== null &&
                     <Callout title="Error" intent={Intent.DANGER} style={{ marginBottom: 20 }}>
-                        There were a few errors while trying to save your changes,
-                        <ul>
-                            {errors}
-                        </ul>
+                        {this.state.errorMessage}
+                        {this.state.errors &&
+                            <ul>
+                                {this.state.errors.map((e, i) => 
+                                    <li key={i}>{e.error}</li>
+                                )}
+                            </ul>
+                        }
                     </Callout>
                 }
                 <FormGroup label="Title" labelFor="title" labelInfo="(required)">

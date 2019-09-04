@@ -9,25 +9,18 @@ const client = axios.create({
 });
 
 
-function request({method, resource, payload, header, token}) {
-    return client({
+async function request({method, resource, payload, header, token}) {
+    let response = await client({
         method: method,
         url: resource,
         data: payload,
         headers: token ? { ...header, authorization: `Bearer ${token}`} : header,
-    }).then((resp) => {
-        return {
-            status: resp.status,
-            data: resp.data || null,
-            error: null
-        }
-    }).catch((error) => {
-        return Promise.reject({
-            status: error.response.status,
-            formErrors: error.response.data.formErrors,
-            error: error.message
-        });
-    })
+    });
+
+    let head = response.data, body = head.body;
+    delete head.body;
+
+    return { response: head, body: body }
 }
 
 export { request };

@@ -5,8 +5,12 @@ import { getToken } from './auth';
  * getProjectList gets the full list of projects
  */
 async function getProjectList() {
-    let response = await request({ method: 'get', resource: '/projects' });
-    return response.data;
+    let { response, body } = await request({ method: 'get', resource: '/projects' });
+    console.log(response, body);
+    if(!response.ok) {
+        return null;
+    }
+    return body.data;
 }
 
 /**
@@ -14,9 +18,13 @@ async function getProjectList() {
  * @param {string} id the ID of the project
  */
 async function getProject(id) {
-    let response = await request({ method: 'get', resource: `/project/${id}/` });
-    let project = response.data;
+    let { response, body } = await request({ method: 'get', resource: `/project/${id}/` });
+    console.log("body", body);
+    if(!response.ok) {
+        return null;
+    }
 
+    let project = body.data;
     project.content = convertNewlines(project.content);
     return project;
 }
@@ -27,15 +35,24 @@ async function getProject(id) {
  * @param {*} project new project information
  */
 async function updateProject({ id, project }) {
-    let response = await request({ 
+    let { response, body } = await request({ 
         method: 'post', 
         resource: `/project/${id}/update`, 
         payload: project,
         token: getToken() 
-    }).catch(errorResp => {
-        return Promise.reject(errorResp)
-    });
-    return response;
+    })
+    
+    if(!response.ok) {
+        return {
+            updated: false,
+            message: response.message,
+            errors: body.validationErrors
+        }
+    }
+    return {
+        updated: true
+    }
+    
 }
 
 /**

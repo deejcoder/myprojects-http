@@ -11,7 +11,7 @@ const validationSubject = new BehaviorSubject(false);
  * @param {*} secretKey 
  */
 async function login(secretKey) {
-    let response = await request({ 
+    let { response, body } = await request({ 
         method: 'post', 
         resource: '/auth/login', 
         payload: {
@@ -19,10 +19,10 @@ async function login(secretKey) {
         }
     });
 
-    if(response.error != null) {
+    if(!response.ok) {
         return false;
     }
-    let token = response.data.token;
+    let token = body.data.token;
 
     if(token != null) {
         // check the token is valid
@@ -46,20 +46,16 @@ function logout() {
 async function validate() {
     if(!tokenSubject.getValue()) { return false }
 
-    let resp = await request({
+    let { response, _ } = await request({
         method: 'get',
         resource: '/auth/validate',
         token: tokenSubject.getValue()
     })
 
-    if(resp.error != null) {
+    if(!response.ok) {
         return false;
     }
-
-    if(resp.data.validated === true) {
-        return true;
-    }
-    return false;
+    return true
 }
 
 async function isValidated() {
