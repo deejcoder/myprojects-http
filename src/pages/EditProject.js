@@ -2,10 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { H2 } from '@blueprintjs/core';
 
-import EditProjectForm from '../components/EditProjectForm';
-import PageContainer from '../components/PageContainer';
-import BackButton from '../components/BackButton';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { EditProjectForm, PageContainer, BackButton, LoadingSpinner } from '../components';
 import { Auth, ProjectStore } from '../api';
 
 

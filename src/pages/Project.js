@@ -6,10 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
 import { Auth, ProjectStore } from '../api';
-import ProjectStatusIcon from '../components/ProjectStatusIcon';
-import BackButton from '../components/BackButton';
-import LoadingSpinner from '../components/LoadingSpinner';
-import PageContainer from '../components/PageContainer';
+import { ProjectStatusIcon, BackButton, LoadingSpinner, PageContainer } from '../components';
 
 
 class Project extends React.Component {

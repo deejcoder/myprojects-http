@@ -12,7 +12,7 @@ import {
 } from '@blueprintjs/core';
 
 import { ProjectStore } from '../api';
-import StatusCallout from '../components/StatusCallout';
+import { StatusCallout } from '../components';
 
 
 export default class EditProjectForm extends React.Component {
@@ -53,7 +53,7 @@ export default class EditProjectForm extends React.Component {
     // sends an update request to update the project
     updateProject = () => {
         this.setState({ loading: true });
-        
+
         let project = this.props.project;
         let { title, status, tags, projectLink, summary, content } = this.state;
 

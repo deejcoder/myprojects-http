@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const BASE_URL = 'http://me.thecodingkiwi.com:8080'
-const BASE_URL = 'http://localhost:8080'
+const BASE_URL = 'http://me.thecodingkiwi.com:8080'
+// const BASE_URL = 'http://localhost:8080'
 
 const client = axios.create({
     baseURL: BASE_URL,

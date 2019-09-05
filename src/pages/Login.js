@@ -4,8 +4,21 @@ import { Intent, Button, Tooltip, InputGroup, H3, FormGroup } from '@blueprintjs
 
 import styled from 'styled-components';
 import { Auth } from '../api';
-import BackButton from '../components/BackButton';
+import { BackButton } from '../components';
 
+
+const CenteredDiv = styled('div')`
+    margin: 0;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 50%;
+    width: 350px;
+    max-width: 90%;
+    background-color: rgba(138, 155, 168, 0.2);
+    padding: 20px;
+    border-radius: 5px;
+`
 
 export default class Login extends React.Component {
 
@@ -59,19 +72,6 @@ export default class Login extends React.Component {
             </Tooltip>
             
         )
-
-        const CenteredDiv = styled('div')`
-            margin: 0;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            top: 40%;
-            left: 50%
-            width: 350px;
-            max-width: 90%;
-            background-color: rgba(138, 155, 168, 0.2);
-            padding: 20px;
-            border-radius: 5px;
-        `
 
         return (
             <React.Fragment>
