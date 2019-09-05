@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card, Tag, H5, Tooltip } from '@blueprintjs/core';
 import styled from 'styled-components';
-import { FaGithub, FaInfoCircle } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
+
+import { ProjectCardDialog } from '../components';
 
 
 const CardWrapper = styled(Card)`
@@ -46,7 +48,7 @@ export default class ProjectCard extends React.Component {
 
     render() {
 
-        let project = this.props.project
+        let project = this.props.project;
 
         return (
             <CardWrapper interactive={true}>
@@ -55,9 +57,7 @@ export default class ProjectCard extends React.Component {
 
                     {/* <ProjectStatusIcon project={project} /> */}
                     <FaIconGroupWrapper>
-                        <Tooltip content="Technical info">
-                            <FaInfoCircle />
-                        </Tooltip>
+                        <ProjectCardDialog project={project} />
                         <Tooltip content="View on GitHub">
                             <a href={project.projectLink}>
                                 <FaGithub />

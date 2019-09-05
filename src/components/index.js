@@ -6,3 +6,4 @@ export { default as ProjectCard } from './ProjectCard';
 export { default as ProjectCardGrid } from './ProjectCardGrid';
 export { default as ProjectStatusIcon } from './ProjectStatusIcon';
 export { default as StatusCallout } from './StatusCallout';
+export { default as ProjectCardDialog } from './ProjectCardDialog';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Intent, Button, Tooltip, InputGroup, H3, FormGroup } from '@blueprintjs/core';
+import { Intent, Button, Tooltip, InputGroup, H3, FormGroup, Classes } from '@blueprintjs/core';
 
 import styled from 'styled-components';
 import { Auth } from '../api';
@@ -36,6 +36,8 @@ export default class Login extends React.Component {
     }
 
     async componentDidMount() {
+        document.body.style.backgroundColor = "#1E1E1E";
+        
         // check if user is already logged in
         if(await Auth.isValidated()) {
             this.setState({ success: true });
@@ -74,7 +76,7 @@ export default class Login extends React.Component {
         )
 
         return (
-            <React.Fragment>
+            <div className={Classes.DARK}>
                 {/* Redirect if user has logged in */}
                 {this.state.success && <Redirect to="/" />}
 
@@ -103,7 +105,7 @@ export default class Login extends React.Component {
 
                     <Button intent={Intent.PRIMARY} loading={loading} onClick={this.performLogin}>Login</Button>
                 </CenteredDiv>
-            </React.Fragment>
+            </div>
         )
     }
 

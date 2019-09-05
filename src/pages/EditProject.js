@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { H2 } from '@blueprintjs/core';
+import { H2, Classes } from '@blueprintjs/core';
 
 import { EditProjectForm, PageContainer, BackButton, LoadingSpinner } from '../components';
 import { Auth, ProjectStore } from '../api';
@@ -15,6 +15,8 @@ export default class EditProject extends React.Component {
     }
 
     async componentDidMount() {
+        document.body.style.backgroundColor = "#1E1E1E";
+
         let params = this.props.match.params;
         let validated = await Auth.isValidated();
 
@@ -37,7 +39,7 @@ export default class EditProject extends React.Component {
 
         if(!loading) {
             return (
-                <React.Fragment>
+                <div className={Classes.DARK} style={{ marginBottom: 70 }}>
                     {validated ? (
                         <React.Fragment>
 
@@ -51,7 +53,7 @@ export default class EditProject extends React.Component {
                     ) : (
                         <Redirect to="/" />
                     )}
-                </React.Fragment>
+                </div>
             )
         }
         return (

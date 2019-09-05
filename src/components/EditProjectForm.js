@@ -10,10 +10,15 @@ import {
     Intent,
     ControlGroup
 } from '@blueprintjs/core';
+import styled from 'styled-components';
 
 import { ProjectStore } from '../api';
 import { StatusCallout } from '../components';
 
+
+const ButtonWrapper = styled(Button)`
+    margin-right: 10px !important;
+`
 
 export default class EditProjectForm extends React.Component {
 
@@ -138,20 +143,19 @@ export default class EditProjectForm extends React.Component {
                 </FormGroup>
 
                 <ControlGroup>
-                    <Button 
+                    <ButtonWrapper 
                         loading={loading ? true : false}
-                        intent={Intent.WARNING}
                         onClick={this.updateProject}
                     >
                         Save
-                    </Button>
-                    <Button
+                    </ButtonWrapper>
+                    <ButtonWrapper
                         loading={loading ? true : false}
                         intent={Intent.DANGER}
                         onClick={this.deleteProject}
                     >
                         Delete
-                    </Button>
+                    </ButtonWrapper>
                 </ControlGroup>
 
             </React.Fragment>
