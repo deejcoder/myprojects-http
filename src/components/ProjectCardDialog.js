@@ -78,11 +78,13 @@ export default class ProjectCardDialog extends React.Component {
                     className={Classes.DARK}
                 >
                     <OverlayCardWrapper>
+                        {/* Content */ }
                         <OverlayHeaderWrapper>{project.title}</OverlayHeaderWrapper> 
                         <DialogBodyWrapper className={Classes.DIALOG_BODY}>
                             <ReactMarkdown source={project.content} />
                         </DialogBodyWrapper>
 
+                        {/* Footer */}
                         <div className={Classes.DIALOG_FOOTER}>
                             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                                 <Button onClick={this.handleClose}>Close</Button>

@@ -10,18 +10,33 @@ const CardWrapper = styled(Card)`
     font-size: 14px;
     background-color: #252526;
     padding: 30px;
+    height: 300px;
 `
 
-const TitleWrapper = styled(H5)`
+const CardTitleWrapper = styled(H5)`
     color: #519ABA;
 `
 
 const CardContentWrapper = styled.div`
     margin-bottom: 25px;
+    display: block !important;
+`
 
+const Tags = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    margin-bottom: 30px;
+    margin-right: 21.5px;
+    margin-left: 21.5px;
 `
 
 const TagWrapper = styled(Tag)`
+    margin-right: 5px;
     background-color: rgba(0, 0, 0, 0) !important;
     font-family: MONOSPACE;
     span {
@@ -51,13 +66,14 @@ export default class ProjectCard extends React.Component {
         let project = this.props.project;
 
         return (
-            <CardWrapper interactive={true}>
+            <CardWrapper interactive={false}>
 
                 <CardContentWrapper>
 
-                    {/* <ProjectStatusIcon project={project} /> */}
                     <FaIconGroupWrapper>
+                        {/* Open technical info dialog & button */}
                         <ProjectCardDialog project={project} />
+                        {/* View on GitHub button */}
                         <Tooltip content="View on GitHub">
                             <a href={project.projectLink}>
                                 <FaGithub />
@@ -65,18 +81,24 @@ export default class ProjectCard extends React.Component {
                         </Tooltip>
                     </FaIconGroupWrapper>
                 
-                    <TitleWrapper className="cardHeader" style={{ width: 100 }}>
+                    {/* Title */}
+                    <CardTitleWrapper className="cardHeader">
                         {project.title} 
-                    </TitleWrapper>
+                    </CardTitleWrapper>
 
                     {/* Summary/Description */}
-                    <p>{project.summary}</p>
+                    <div>
+                        <p>{project.summary}</p>
+                    </div>
 
                 </CardContentWrapper>
+
                 {/* Tags */}
-                {project.tags.map((tag, i) => 
-                    <TagWrapper key={i} round minimal style={{ marginRight: "5px"}}>{tag}</TagWrapper>
-                )}
+                <Tags>
+                    {project.tags.map((tag, i) => 
+                        <TagWrapper key={i} round minimal>{tag}</TagWrapper>
+                    )}
+                </Tags>
 
             </CardWrapper>
         );
