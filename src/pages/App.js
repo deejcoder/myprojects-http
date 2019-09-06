@@ -15,7 +15,8 @@ const TitleWrapper = styled(H2)`
     text-align: center;
     margin-bottom: 50px;
     margin-top: 100px;
-    color: #909090;
+    color: #DBDBDB;
+    font-weight: normal;
 `
 
 const FooterWrapper = styled.div`
@@ -47,7 +48,7 @@ export default class App extends React.Component {
 
     async componentDidMount() {
         // set body background color
-        document.body.style.backgroundColor = "#1E1E1E";
+        document.body.style.backgroundColor = "#181818";
 
         // test if user is authenticated
         if(await Auth.isValidated()) {

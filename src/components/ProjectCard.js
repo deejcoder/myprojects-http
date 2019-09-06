@@ -11,6 +11,12 @@ const CardWrapper = styled(Card)`
     background-color: #252526;
     padding: 30px;
     height: 300px;
+    cursor: default;
+    border: 0.5px solid #252526;
+
+    &:hover {
+        border: 0.5px solid #519ABA;
+    }
 `
 
 const CardTitleWrapper = styled(H5)`
@@ -48,6 +54,7 @@ const FaIconGroupWrapper = styled.span`
     font-size: 24px;
     color: #519ABA;
     float: right;
+    cursor: pointer;
     
     * {
         padding: 2px;

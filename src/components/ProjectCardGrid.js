@@ -98,7 +98,7 @@ export default class ProjectCardGrid extends React.Component {
 
             for(const [i, project] of projects.entries()) {
                 row.push(
-                    <ColWrapper key={i} xs={8} md={4} xl={3} style={{ minWidth: `${this.state.colWidth}px` }}>
+                    <ColWrapper key={i} xs={2} md={3} xl={3} style={{ minWidth: `${this.state.colWidth}px` }}>
                         <ProjectCard project={project} />
                     </ColWrapper>
                 )
