@@ -44,7 +44,7 @@ const Tags = styled.div`
 const TagWrapper = styled(Tag)`
     margin-right: 5px;
     background-color: rgba(0, 0, 0, 0) !important;
-    font-family: MONOSPACE;
+    font-family: "Open Sans";
     span {
         color: #519ABA;
     }
