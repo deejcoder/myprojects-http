@@ -7,14 +7,14 @@ import me from '../assets/pic.jpg';
 const HeaderWrapper = styled.div`
     position: relative;
     top: 0;
-    height: 65vh;
+    height: 45vh;
     width: 100%;
 
 `
 const HeaderContentWrapper = styled.div`
     position: relative;
     width: 586px;
-    top: 283px;
+    top: 150px;
     margin-right: auto;
     margin-left: auto;
 `
