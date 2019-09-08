@@ -9,7 +9,7 @@ const HeaderWrapper = styled.div`
     top: 0;
     width: 100%;
     height: 200px;
-    margin-top: 150px;
+    margin-top: 100px;
     margin-bottom: 50px;
 
 `
