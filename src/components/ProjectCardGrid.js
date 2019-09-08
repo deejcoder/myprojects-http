@@ -1,10 +1,22 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
+import { H1 } from '@blueprintjs/core';
 
 import { ProjectCard, LoadingSpinner } from '../components';
 import { ProjectStore } from '../api';
 import styled from 'styled-components';
 
+
+const TitleWrapper = styled(H1)`
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 100px;
+    color: #DBDBDB;
+    font-family: 'Chivo', sans-serif;
+    font-weight: 300;
+    font-size: 32px !important;
+    line-height: 38px;
+`
 
 const ColWrapper = styled(Col)`
     /* Remove padding from columns, replace with margin */
@@ -111,9 +123,13 @@ export default class ProjectCardGrid extends React.Component {
             }
 
             return (
-                <Container style={{ lineHeight: '24px'}}>
-                    {rows.map((r, i) => <RowWrapper key={i}>{r}</RowWrapper>)}
-                </Container>
+                <React.Fragment>
+                    <TitleWrapper>My Projects</TitleWrapper>
+
+                    <Container style={{ lineHeight: '24px'}}>
+                        {rows.map((r, i) => <RowWrapper key={i}>{r}</RowWrapper>)}
+                    </Container>
+                </React.Fragment>
             )
         }
 

@@ -5,9 +5,7 @@ import { H1, Tag } from '@blueprintjs/core';
 
 const AboutContainer = styled.div`
     position: relative;
-    height: 55vh;
     width: 100%;
-
 `
 
 const AboutContentWrapper = styled.div`

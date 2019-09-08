@@ -1,30 +1,30 @@
 import React from 'react';
 
-import { ProjectCardGrid, Header } from '../components';
+import { ProjectCardGrid, HeaderSection, AboutSection, NavBar } from '../components';
 import { Intent, H1 } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import { Auth } from '../api';
 import styled from 'styled-components';
-import About from '../components/About';
 
 
 const AppWrapper = styled.div`
+    position: absolute;
     color: #b3b3b3;
     font-family: "Open Sans";
+    width: 100%;
+    height: 100%;
 `
 
-const TitleWrapper = styled(H1)`
-    text-align: center;
-    margin-bottom: 50px;
-    margin-top: 100px;
-    color: #DBDBDB;
-    font-family: 'Chivo', sans-serif;
-    font-weight: 300;
-    font-size: 32px !important;
-    line-height: 38px;
+const NarrowContainer = styled.div`
+    position: relative;
+    top: 0%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 600px;
+    height: 100%;
 `
 
-const FooterWrapper = styled.div`
+const Footer = styled.div`
     margin-top: 150px;
     margin-bottom: 0;
     height: 75px;
@@ -50,6 +50,7 @@ const LogoutWrapper = styled.p`
     padding: 15px;
     z-index: 1;
 `
+
 
 export default class App extends React.Component {
     
@@ -86,17 +87,22 @@ export default class App extends React.Component {
                     <LogoutWrapper>You are logged in... <Link intent={Intent.WARNING} onClick={this._handleClick}>Logout</Link></LogoutWrapper>
                 }
 
-                <Header></Header>
-                <About />
+                <NavBar />
 
-                <TitleWrapper>My Projects</TitleWrapper>
+                <NarrowContainer>
+                    <HeaderSection />
+                    <AboutSection />
+                </NarrowContainer>
+
                 <ProjectCardGrid />
 
-                <FooterWrapper>
+                <Footer>
                     <FooterText>
                         Designed & developed by Dylan Tonks<br />2019
                     </FooterText>
-                </FooterWrapper>
+                </Footer>
+
+
             
             </AppWrapper>
         )
