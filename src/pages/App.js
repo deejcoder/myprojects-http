@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ProjectCardGrid, HeaderSection, AboutSection, NavBar } from '../components';
+import { Element } from 'react-scroll';
 import { Intent, H1 } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import { Auth } from '../api';
@@ -22,6 +23,7 @@ const NarrowContainer = styled.div`
     margin-left: auto;
     max-width: 600px;
     height: 100%;
+    min-height: 683px;
 `
 
 const Footer = styled.div`
@@ -90,19 +92,21 @@ export default class App extends React.Component {
                 <NavBar />
 
                 <NarrowContainer>
-                    <HeaderSection />
-                    <AboutSection />
+                    <Element name="about">
+                        <HeaderSection />
+                        <AboutSection />
+                    </Element>
                 </NarrowContainer>
 
-                <ProjectCardGrid />
+                <Element name="projects">
+                    <ProjectCardGrid id='projects' />
+                </Element>
 
                 <Footer>
                     <FooterText>
                         Designed & developed by Dylan Tonks<br />2019
                     </FooterText>
                 </Footer>
-
-
             
             </AppWrapper>
         )

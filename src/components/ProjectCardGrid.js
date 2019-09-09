@@ -10,7 +10,6 @@ import styled from 'styled-components';
 const TitleWrapper = styled(H1)`
     text-align: center;
     margin-bottom: 50px;
-    margin-top: 100px;
     color: #DBDBDB;
     font-family: 'Chivo', sans-serif;
     font-weight: 300;
