@@ -6,13 +6,19 @@ import { H1, Tag } from '@blueprintjs/core';
 const AboutContainer = styled.div`
     position: relative;
     width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    @media screen and (max-width: 767px) {
+        height: 1000px !important;
+    }
 `
 
 const AboutContentWrapper = styled.div`
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    width: 586px;
+    width: 100%;
 `
 
 const Title = styled(H1)`

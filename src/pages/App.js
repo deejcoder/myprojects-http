@@ -24,6 +24,10 @@ const NarrowContainer = styled.div`
     max-width: 600px;
     height: 100%;
     min-height: 683px;
+
+    @media screen and (max-width: 767px) {
+        min-height: 950px;
+    }
 `
 
 const Footer = styled.div`
@@ -47,7 +51,7 @@ const FooterText = styled.div`
 
 const LogoutWrapper = styled.p`
     position: absolute;
-    top: 0;
+    top: 65px;
     right: 0;
     padding: 15px;
     z-index: 1;
@@ -85,11 +89,11 @@ export default class App extends React.Component {
     render() {
         return (
             <AppWrapper>
+
+                <NavBar />
                 {this.state.hasAuth && !this.state.loggedOut && 
                     <LogoutWrapper>You are logged in... <Link intent={Intent.WARNING} onClick={this._handleClick}>Logout</Link></LogoutWrapper>
                 }
-
-                <NavBar />
 
                 <NarrowContainer>
                     <Element name="about">

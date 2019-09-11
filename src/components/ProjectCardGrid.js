@@ -102,7 +102,7 @@ export default class ProjectCardGrid extends React.Component {
 
     render() {
 
-        // wraps a column consisting of one project, inside a row
+        // produces a dynamic (resizing) grid of projects
         const Rows = ({ projects }) => {
             let rows = []
             let row = []
@@ -123,23 +123,23 @@ export default class ProjectCardGrid extends React.Component {
 
             return (
                 <React.Fragment>
-                    <TitleWrapper>My Projects</TitleWrapper>
-
-                    <Container style={{ lineHeight: '24px'}}>
-                        {rows.map((r, i) => <RowWrapper key={i}>{r}</RowWrapper>)}
-                    </Container>
+                    {rows.map((r, i) => <RowWrapper key={i}>{r}</RowWrapper>)}
                 </React.Fragment>
             )
         }
 
-        if(this.state.loading) {
-            return (
-                <LoadingSpinner />
-            )
-        }
-
         return (
-            <Rows projects={this.state.projects}></Rows>
+            <React.Fragment>
+
+                <TitleWrapper>My Projects</TitleWrapper>
+                <Container style={{ lineHeight: '24px' }}>
+                    {this.state.loading ? (
+                        <LoadingSpinner />
+                    ) : (
+                        <Rows projects={this.state.projects}></Rows>
+                    )}
+                </Container>
+            </React.Fragment>
         )
     }
 }

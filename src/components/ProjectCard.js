@@ -17,6 +17,10 @@ const CardWrapper = styled(Card)`
     &:hover {
         border: 0.5px solid #519ABA;
     }
+
+    @media screen and (max-width: 767px) {
+        height: 340px;
+    }
 `
 
 const CardTitleWrapper = styled(H5)`
