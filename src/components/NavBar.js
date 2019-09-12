@@ -51,6 +51,11 @@ const MenuItem = styled.li`
         color: #519ABA;
     }
 
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
     @media screen and (max-width: 767px) {
         text-align: center;
         padding-left: 5px;
@@ -84,7 +89,7 @@ export default class NavBar extends React.Component {
                         <MenuItem
                             onClick={() => scroller.scrollTo('projects', scrollOptions)}
                         >My Projects</MenuItem>
-                        <MenuItem>Résumé</MenuItem>
+                        <MenuItem><a href="https://drive.google.com/file/d/1rAIGGW6FOpTxIiEDQsdtRC8hSACxg2Rv/view?usp=sharing">Résumé</a></MenuItem>
                     </ul>
                 </Menu>
             </MenuContainer>
