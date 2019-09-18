@@ -22,7 +22,7 @@ const NarrowContainer = styled.div`
     margin-right: auto;
     margin-left: auto;
     max-width: 600px;
-    height: 100%;
+    height: 683px;
     min-height: 683px;
 
     @media screen and (max-width: 767px) {
