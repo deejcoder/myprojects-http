@@ -2,15 +2,16 @@ import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import { H1 } from '@blueprintjs/core';
 
-import { ProjectCard, LoadingSpinner } from '../components';
-import { ProjectStore } from '../api';
+import { ProjectCard, LoadingSpinner } from '..';
+import { ProjectStore } from '../../api';
 import styled from 'styled-components';
+import { HEADER_COLOR } from '../../const/colours';
 
 
 const TitleWrapper = styled(H1)`
     text-align: center;
     margin-bottom: 50px;
-    color: #DBDBDB;
+    color: ${HEADER_COLOR};
     font-family: 'Chivo', sans-serif;
     font-weight: 300;
     font-size: 32px !important;

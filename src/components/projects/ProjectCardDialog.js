@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
-import { Auth } from '../api';
+import { Auth } from '../../api';
+import { SECONDARY_HIGHLIGHTED_TEXT, TEXT_COLOR } from '../../const/colours';
 
 
 const DialogBodyWrapper = styled.div`
 `
 
 const OverlayCardWrapper = styled(Card)`
-    color: #b3b3b3;
+    color: ${TEXT_COLOR};
     background-color: #1E1E1E !important;
     transform: translate(-50%, -50%);
     top: 45%;
@@ -27,7 +28,7 @@ const OverlayCardWrapper = styled(Card)`
 `
 
 const OverlayHeaderWrapper = styled(H3)`
-    color: #519ABA !important;
+    color: ${SECONDARY_HIGHLIGHTED_TEXT} !important;
 `
 
 const OverlayWrapper = styled(Overlay)`

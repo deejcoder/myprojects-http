@@ -12,8 +12,8 @@ import {
 } from '@blueprintjs/core';
 import styled from 'styled-components';
 
-import { ProjectStore } from '../api';
-import { StatusCallout } from '../components';
+import { ProjectStore } from '../../api';
+import { StatusCallout } from '..';
 
 
 const ButtonWrapper = styled(Button)`

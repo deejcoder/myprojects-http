@@ -1,19 +1,26 @@
 import React from 'react';
 
-import { ProjectCardGrid, HeaderSection, AboutSection, NavBar } from '../components';
+import { ProjectCardGrid, Header, About, NavBar, Footer } from '../components';
 import { Element } from 'react-scroll';
 import { Intent, H1 } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 import { Auth } from '../api';
 import styled from 'styled-components';
+import { PAGE_BACKGROUND, TEXT_COLOR } from '../const/colours';
 
 
 const AppWrapper = styled.div`
     position: absolute;
-    color: #b3b3b3;
+    color: ${TEXT_COLOR};
     font-family: "Open Sans";
     width: 100%;
     height: 100%;
+    min-height: 100vh;
+`
+
+const Container = styled.div`
+    min-height: 100vh;
+    margin-bottom: 150px;
 `
 
 const NarrowContainer = styled.div`
@@ -30,24 +37,7 @@ const NarrowContainer = styled.div`
     }
 `
 
-const Footer = styled.div`
-    margin-top: 150px;
-    margin-bottom: 0;
-    height: 75px;
-    background-color: #151515;
-`
 
-const FooterText = styled.div`
-    color: #464646;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-`
 
 const LogoutWrapper = styled.p`
     position: absolute;
@@ -73,7 +63,7 @@ export default class App extends React.Component {
 
     async componentDidMount() {
         // set body background color
-        document.body.style.backgroundColor = "#181818";
+        document.body.style.backgroundColor = PAGE_BACKGROUND;
 
         // test if user is authenticated
         if(await Auth.isValidated()) {
@@ -88,31 +78,32 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <AppWrapper>
+            <React.Fragment>
+                <AppWrapper>
 
-                <NavBar />
-                {this.state.hasAuth && !this.state.loggedOut && 
-                    <LogoutWrapper>You are logged in... <Link intent={Intent.WARNING} onClick={this._handleClick}>Logout</Link></LogoutWrapper>
-                }
+                    <Container>
+                        <NavBar />
+                        {this.state.hasAuth && !this.state.loggedOut && 
+                            <LogoutWrapper>You are logged in... <Link intent={Intent.WARNING} onClick={this._handleClick}>Logout</Link></LogoutWrapper>
+                        }
 
-                <NarrowContainer>
-                    <Element name="about">
-                        <HeaderSection />
-                        <AboutSection />
-                    </Element>
-                </NarrowContainer>
+                        <NarrowContainer>
+                            <Element name="about">
+                                <Header />
+                                <About />
+                            </Element>
+                        </NarrowContainer>
 
-                <Element name="projects">
-                    <ProjectCardGrid id='projects' />
-                </Element>
+                        <Element name="projects">
+                            <ProjectCardGrid id='projects' />
+                        </Element>         
+                    </Container>  
 
-                <Footer>
-                    <FooterText>
-                        Designed & developed by Dylan Tonks<br />2019
-                    </FooterText>
-                </Footer>
-            
-            </AppWrapper>
+                    <Footer />
+                </AppWrapper>
+
+
+            </React.Fragment>
         )
     }
 }

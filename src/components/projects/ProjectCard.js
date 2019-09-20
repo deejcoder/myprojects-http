@@ -3,19 +3,20 @@ import { Card, Tag, H5, Tooltip } from '@blueprintjs/core';
 import styled from 'styled-components';
 import { FaGithub } from 'react-icons/fa';
 
-import { ProjectCardDialog } from '../components';
+import { ProjectCardDialog } from '..';
+import { SECONDARY_HIGHLIGHTED_TEXT, CARD_BACKGROUND } from '../../const/colours';
 
 
 const CardWrapper = styled(Card)`
     font-size: 14px;
-    background-color: #252526;
+    background-color: ${CARD_BACKGROUND};
     padding: 30px;
     height: 300px;
     cursor: default;
-    border: 0.5px solid #252526;
+    border: 0.5px solid ${CARD_BACKGROUND};
 
     &:hover {
-        border: 0.5px solid #519ABA;
+        border: 0.5px solid ${SECONDARY_HIGHLIGHTED_TEXT};
     }
 
     @media screen and (max-width: 767px) {
@@ -23,11 +24,11 @@ const CardWrapper = styled(Card)`
     }
 `
 
-const CardTitleWrapper = styled(H5)`
-    color: #519ABA;
+const CardTitle = styled(H5)`
+    color: ${SECONDARY_HIGHLIGHTED_TEXT};
 `
 
-const CardContentWrapper = styled.div`
+const CardContent = styled.div`
     margin-bottom: 25px;
     display: block !important;
 `
@@ -50,13 +51,13 @@ const TagWrapper = styled(Tag)`
     background-color: rgba(0, 0, 0, 0) !important;
     font-family: "Open Sans";
     span {
-        color: #519ABA;
+        color: ${SECONDARY_HIGHLIGHTED_TEXT};
     }
 `
 
-const FaIconGroupWrapper = styled.span`
-    font-size: 24px;
-    color: #519ABA;
+const FaIconGroup = styled.span`
+    font-size: 28px;
+    color: ${SECONDARY_HIGHLIGHTED_TEXT};
     float: right;
     cursor: pointer;
     
@@ -65,7 +66,7 @@ const FaIconGroupWrapper = styled.span`
     }
 
     a {
-        color: #519ABA;
+        color: ${SECONDARY_HIGHLIGHTED_TEXT};
         text-decoration: none;
     }
 `
@@ -79,9 +80,9 @@ export default class ProjectCard extends React.Component {
         return (
             <CardWrapper interactive={false}>
 
-                <CardContentWrapper>
+                <CardContent>
 
-                    <FaIconGroupWrapper>
+                    <FaIconGroup>
                         {/* Open technical info dialog & button */}
                         <ProjectCardDialog project={project} />
                         {/* View on GitHub button */}
@@ -90,19 +91,19 @@ export default class ProjectCard extends React.Component {
                                 <FaGithub />
                             </a>
                         </Tooltip>
-                    </FaIconGroupWrapper>
+                    </FaIconGroup>
                 
                     {/* Title */}
-                    <CardTitleWrapper className="cardHeader">
+                    <CardTitle className="cardHeader">
                         {project.title} 
-                    </CardTitleWrapper>
+                    </CardTitle>
 
                     {/* Summary/Description */}
                     <div>
                         <p>{project.summary}</p>
                     </div>
 
-                </CardContentWrapper>
+                </CardContent>
 
                 {/* Tags */}
                 <Tags>

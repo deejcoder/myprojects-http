@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { H3, H1 } from '@blueprintjs/core';
-import me from '../assets/pic.jpg';
+import { Avatar } from '../components';
+import { PRIMARY_HIGHLIGHTED_TEXT, HEADER_COLOR, TEXT_COLOR } from '../const/colours';
 
 
 const HeaderWrapper = styled.div`
@@ -30,7 +31,7 @@ const HeaderContent = styled.div`
     padding-left: 33px;
 
     h1, h3 {
-        color: #B3B3B3;
+        color: ${TEXT_COLOR};
     }
 
     @media screen and (max-width: 767px) {
@@ -42,25 +43,8 @@ const HeaderContent = styled.div`
     
 `
 
-const HeaderImage = styled.div`
-    position: relative;
-    float: left;
-    margin-top: 10px;
-    background: url(${me});
-    background-size: cover;
-    height: 187px;
-    width: 187px;
-    border-radius: 50%;
-
-    @media screen and (max-width: 767px) {
-        float: unset;
-        margin-right: auto;
-        margin-left: auto;
-    }
-`
-
 const HighlightedText = styled.span`
-    color: #73C4E8;
+    color: ${PRIMARY_HIGHLIGHTED_TEXT};
 `
 
 const HiLine = styled(H3)`
@@ -69,7 +53,7 @@ const HiLine = styled(H3)`
     font-weight: normal;
     font-size: 28px !important;
     line-height: 33px !important;
-    color: #73C4E8 !important;
+    color: ${PRIMARY_HIGHLIGHTED_TEXT} !important;
 
     @media screen and (max-width: 767px) {
         line-height: 16px !important;
@@ -84,7 +68,7 @@ const NameLine = styled(H1)`
     font-weight: bold;
     font-size: 46px !important;
     line-height: 49px !important;
-    color: #DBDBDB !important;
+    color: ${HEADER_COLOR} !important;
 
     @media screen and (max-width: 767px) {
         width: 250px;
@@ -116,7 +100,7 @@ const IntroLine = styled.p`
     padding-right: 20px;
     font-size: 18px;
     font-weight: 300;
-    color: #B3B3B3 !important;
+    color: ${TEXT_COLOR} !important;
 
     @media screen and (max-width: 767px) {
         margin-left: 0;
@@ -138,7 +122,7 @@ export default class Header extends React.Component {
         return (
             <HeaderWrapper>
                 <HeaderContentWrapper>
-                    <HeaderImage />
+                    <Avatar size={187} />
                     <HeaderContent>
                         <TextWrapper>
                             <HiLine>Hi, I'm</HiLine>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { scroller } from 'react-scroll';
+import { SECONDARY_HIGHLIGHTED_TEXT } from '../const/colours';
 
 
 const MenuContainer = styled.div`
@@ -48,7 +49,7 @@ const MenuItem = styled.li`
     cursor: pointer;
 
     &:hover {
-        color: #519ABA;
+        color: ${SECONDARY_HIGHLIGHTED_TEXT};
     }
 
     a {

@@ -2,6 +2,10 @@ import React from 'react';
 import { Callout, Intent } from '@blueprintjs/core';
 
 
+/**
+ * StatusCallout processes an error message received from an API response
+ * an displays it to the user, this is used for e.g form validation
+ */
 export default class StatusCallout extends React.Component {
     render() {
         let {success, message, errors} = this.props;

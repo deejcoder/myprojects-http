@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { H1, Tag } from '@blueprintjs/core';
+import { SECONDARY_HIGHLIGHTED_TEXT, HEADER_COLOR } from '../const/colours';
 
 
 const AboutContainer = styled.div`
@@ -14,7 +15,7 @@ const AboutContainer = styled.div`
     }
 `
 
-const AboutContentWrapper = styled.div`
+const AboutContent = styled.div`
     position: relative;
     margin-left: auto;
     margin-right: auto;
@@ -26,7 +27,7 @@ const Title = styled(H1)`
     font-weight: 300;
     font-size: 32px !important;
     line-height: 38px;
-    color: #DBDBDB;
+    color: ${HEADER_COLOR};
 `
 
 const Text = styled.p`
@@ -35,7 +36,7 @@ const Text = styled.p`
 `
 
 const HighlightedText = styled.span`
-    color: #519ABA;
+    color: ${SECONDARY_HIGHLIGHTED_TEXT};
 `
 
 const ListContainer = styled.span`
@@ -44,15 +45,21 @@ const ListContainer = styled.span`
 const ListItem = styled(Tag)`
     margin-right: 5px;
     margin-bottom: 5px;
-    color: #519ABA;
+    color: ${SECONDARY_HIGHLIGHTED_TEXT};
     background-color: rgba(0, 0, 0, 0) !important;
 `
 
 export default class About extends React.Component {
+
     render() {
+        let languages = [
+            "Django/Flask", "React", "Golang", "Python", "Java", 
+            "Linux (Debian, Ubuntu)", "MongoDB", "MySQL", "ElasticSearch", "Ansible", "Docker"
+        ]
+
         return (
             <AboutContainer>
-                <AboutContentWrapper>
+                <AboutContent>
                     <Title>About Me</Title>
                     <Text className="bp3-running-text bp3-theme-dark">
                         Hello visitor! I'm Dylan Tonks, a computer scientist based in <HighlightedText>Hawke's Bay, NZ</HighlightedText>, who has always been passionate about developing computer software since a young age. I mainly focus on developing intelligent, efficient and high quality backends to web applications, or servers. Although, I also have experience developing frontends too!
@@ -63,19 +70,11 @@ export default class About extends React.Component {
                     </Text>
 
                     <ListContainer>
-                        <ListItem>Django/Flask</ListItem>
-                        <ListItem>React</ListItem>
-                        <ListItem>Golang</ListItem>
-                        <ListItem>Python</ListItem>
-                        <ListItem>Java</ListItem>
-                        <ListItem>Linux (Debian, Ubuntu)</ListItem>
-                        <ListItem>MongoDB</ListItem>
-                        <ListItem>MySQL</ListItem>
-                        <ListItem>ElasticSearch</ListItem>
-                        <ListItem>Ansible</ListItem>
-                        <ListItem>Docker</ListItem>
+                        {languages.map((lang, i) => 
+                            <ListItem key={i}>{lang}</ListItem>
+                        )}
                     </ListContainer>
-                </AboutContentWrapper>
+                </AboutContent>
             </AboutContainer>
         )
     }

@@ -1,12 +1,16 @@
 export { default as BackButton } from './BackButton';
-export { default as EditProjectForm } from './EditProjectForm';
 export { default as LoadingSpinner } from './LoadingSpinner';
-export { default as PageContainer } from './PageContainer';
-export { default as ProjectCard } from './ProjectCard';
-export { default as ProjectCardGrid } from './ProjectCardGrid';
-export { default as ProjectStatusIcon } from './ProjectStatusIcon';
+
+export { default as EditProjectForm } from './projects/EditProjectForm';
+export { default as ProjectCard } from './projects/ProjectCard';
+export { default as ProjectCardGrid } from './projects/ProjectCardGrid';
+export { default as ProjectStatusIcon } from './projects/ProjectStatusIcon';
+export { default as ProjectCardDialog } from './projects/ProjectCardDialog';
+
 export { default as StatusCallout } from './StatusCallout';
-export { default as ProjectCardDialog } from './ProjectCardDialog';
-export { default as HeaderSection } from './HeaderSection';
-export { default as AboutSection } from './AboutSection';
+export { default as Header } from './Header';
+export { default as Avatar } from './Avatar';
+export { default as About } from './About';
 export { default as NavBar } from './NavBar';
+export { default as SocialIcons } from './SocialIcons';
+export { default as Footer } from './Footer';

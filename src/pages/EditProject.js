@@ -1,9 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import { Redirect } from 'react-router-dom';
 import { H2, Classes } from '@blueprintjs/core';
 
-import { EditProjectForm, PageContainer, BackButton, LoadingSpinner } from '../components';
+import { EditProjectForm, BackButton, LoadingSpinner } from '../components';
 import { Auth, ProjectStore } from '../api';
+import { Container } from 'react-grid-system';
+
+
+const PageContainer = styled(Container)`
+    max-width: 800px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+`
 
 
 export default class EditProject extends React.Component {
