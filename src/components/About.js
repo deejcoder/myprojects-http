@@ -53,8 +53,8 @@ export default class About extends React.Component {
 
     render() {
         let languages = [
-            "Django/Flask", "React", "Golang", "Python", "Java", 
-            "Linux (Debian, Ubuntu)", "MongoDB", "MySQL", "ElasticSearch", "Ansible", "Docker"
+            ".NET 6.0", ".NET Framework", "Blazor", "MAUI", "Xamarin", 
+            "SQL Server", "MongoDB", "MediatR", "WinForms", "Git"
         ]
 
         return (
@@ -62,11 +62,11 @@ export default class About extends React.Component {
                 <AboutContent>
                     <Title>About Me</Title>
                     <Text className="bp3-running-text bp3-theme-dark">
-                        Hello visitor! I'm Dylan Tonks, a computer scientist based in <HighlightedText>Hawke's Bay, NZ</HighlightedText>, who has always been passionate about developing computer software since a young age. I mainly focus on developing intelligent, efficient and high quality backends to web applications, or servers. Although, I also have experience developing frontends too!
+                        Hello visitor! I'm Dylan Tonks, a computer scientist based in <HighlightedText>Tauranga</HighlightedText>, who has always been passionate about developing computer software since a young age. For almost three years, I have worked as <HighlightedText>.NET developer</HighlightedText>, where I have worked on desktop and mobile solutions.
                         <br /><br />
-                        Having recently finished at <HighlightedText>Massey University</HighlightedText> in Palmerston North, I'm now seeking to develop my knowledge further, through finding a new career.
+                        In 2018, I graduated from <HighlightedText>Massey University</HighlightedText>, in Palmerston North, after completing a degree in Computer Science. During my venture at university, I also completed a number of courses in mathematics and information technology.
                         <br /><br />
-                        Some technologies I have recently used include,
+                        Some frameworks or technologies I have recently used include,
                     </Text>
 
                     <ListContainer>

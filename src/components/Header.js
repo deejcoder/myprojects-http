@@ -129,7 +129,7 @@ export default class Header extends React.Component {
                             <NameLine>Dylan Tonks</NameLine>
                             <TagLine>...but some call me a <HighlightedText>Machine</HighlightedText>.</TagLine>
                         </TextWrapper>
-                        <IntroLine>I’m a kiwi and computer scientist, who enjoys developing new and exciting ideas.</IntroLine>
+                        <IntroLine>I’m a kiwi computer scientist, who enjoys developing new and exciting ideas.</IntroLine>
                     </HeaderContent>
                 </HeaderContentWrapper>
             </HeaderWrapper>

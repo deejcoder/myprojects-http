@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import me from '../assets/pic.jpg'
+import me from '../assets/pic.png'
 
 
 export default class Avatar extends React.Component {

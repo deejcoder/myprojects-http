@@ -29,3 +29,7 @@ mkdir -p /home/apps/myprojects/logs/www
 
 You should now be able to visit the web server by visiting http://{domain}:80
 
+NOTE: before running yarn build, yarn install, yarn upgrade, then
+$env:NODE_OPTIONS="--openssl-legacy-provider"
+yarn build
+
